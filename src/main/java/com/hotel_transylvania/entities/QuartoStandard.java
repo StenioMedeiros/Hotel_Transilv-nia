@@ -1,27 +1,29 @@
 package com.hotel_transylvania.entities;
 
+import com.hotel_transylvania.enums.TipoQuarto;
+import jakarta.persistence.Entity;
+import java.math.BigDecimal;
+
+@Entity
 public class QuartoStandard extends Quarto {
+    
+    public QuartoStandard() {
+        super();
+        this.setTipo(TipoQuarto.STANDARD);
+    }
 
-    private String tipo;
-
-    public QuartoStandard(int numero, double preco) {
-        super(numero, preco);
-        this.tipo = "Standard";
+    public QuartoStandard(Integer numero, BigDecimal preco) {
+        super(numero, preco, TipoQuarto.STANDARD);
     }
 
     @Override
-    public double calcularPreco() {
+    public BigDecimal calcularPrecoTotal() {
         return getPreco();
     }
 
     @Override
     public String exibirInfo() {
-        return "Quarto Standard Nº" + getNumero() +
-               " - Preço: R$" + calcularPreco() +
-               " - Disponível: " + estaDisponivel();
-    }
-
-    public String getTipo() {
-        return tipo;
+        return String.format("Quarto Standard #%d - Preço: R$%.2f - %s",
+                getNumero(), getPreco(), getDisponivel() ? "Disponível" : "Ocupado");
     }
 }

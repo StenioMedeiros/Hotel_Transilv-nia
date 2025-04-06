@@ -20,6 +20,33 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGenericException(Exception e) {
-        return ResponseEntity.internalServerError().body("Ocorreu um erro inesperado: " + e.getMessage());
+        return ResponseEntity.internalServerError().body("Ocorreu um erro inesperado: " + e.getMessage());     
     }
+        
+    @ExceptionHandler(QuartoNaoEncontradoException.class)
+    public ResponseEntity<String> handleQuartoNaoEncontrado(QuartoNaoEncontradoException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
+    @ExceptionHandler({NumeroQuartoJaExisteException.class, TipoQuartoInvalidoException.class, 
+                      PrecoQuartoInvalidoException.class})
+    public ResponseEntity<String> handleQuartoBadRequests(HotelTransylvaniaException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(QuartoNaoDisponivelException.class)
+    public ResponseEntity<String> handleQuartoNaoDisponivel(QuartoNaoDisponivelException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    }  
+    
+    @ExceptionHandler(ServicoExtraNaoEncontradoException.class)
+    public ResponseEntity<String> handleServicoExtraNaoEncontrado(ServicoExtraNaoEncontradoException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
+    @ExceptionHandler({ServicoExtraJaExisteException.class, PrecoServicoInvalidoException.class})
+    public ResponseEntity<String> handleServicoExtraBadRequests(HotelTransylvaniaException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+    
 }

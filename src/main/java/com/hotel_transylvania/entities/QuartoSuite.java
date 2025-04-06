@@ -1,43 +1,67 @@
 package com.hotel_transylvania.entities;
 
+import com.hotel_transylvania.enums.TipoQuarto;
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class QuartoSuite extends Quarto {
+    
+    @OneToMany(mappedBy = "quarto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ServicoExtra> servicosExtras = new ArrayList<>();
 
-    private String tipo;
-    private List<String> servicosExtras;
+    public QuartoSuite() {
+        super();
+        this.setTipo(TipoQuarto.SUITE);
+    }
 
-    public QuartoSuite(int numero, double preco, List<String> servicosExtras) {
-        super(numero, preco);
-        this.tipo = "Suite";
-        this.servicosExtras = servicosExtras;
+    public QuartoSuite(Integer numero, BigDecimal preco, List<ServicoExtra> servicosExtras) {
+        super(numero, preco, TipoQuarto.SUITE);
+        if (servicosExtras != null) {
+            this.servicosExtras = servicosExtras;
+            this.servicosExtras.forEach(servico -> servico.setQuarto(this));
+        }
     }
 
     @Override
-    public double calcularPreco() {
-        // preco temporário para os servicos extras.
-    	//deve ser mudado ***********
-        double adicional = servicosExtras.size() * 50.0;
-        return getPreco() + adicional;
+    public BigDecimal calcularPrecoTotal() {
+        BigDecimal totalServicos = servicosExtras.stream()
+                .map(ServicoExtra::getPrecoAdicional)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        
+        return getPreco().add(totalServicos);
     }
 
     @Override
     public String exibirInfo() {
-        return "Quarto Suíte Nº" + getNumero() +
-               " - Preço com adicionais: R$" + calcularPreco() +
-               " - Serviços extras: " + servicosExtras +
-               " - Disponível: " + estaDisponivel();
+        StringBuilder servicos = new StringBuilder();
+        servicosExtras.forEach(servico -> 
+            servicos.append(servico.getNome()).append(", "));
+        
+        return String.format("Suíte #%d - Preço Base: R$%.2f - Serviços: %s - %s",
+                getNumero(), 
+                getPreco(),
+                servicos.length() > 0 ? servicos.substring(0, servicos.length() - 2) : "Nenhum",
+                getDisponivel() ? "Disponível" : "Ocupado");
     }
 
-    public String getTipo() {
-        return tipo;
-    }
-
-    public List<String> getServicosExtras() {
+    // Getters e Setters corretamente tipados
+    public List<ServicoExtra> getServicosExtras() {
         return servicosExtras;
     }
 
-    public void setServicosExtras(List<String> servicosExtras) {
-        this.servicosExtras = servicosExtras;
+    public void setServicosExtras(List<ServicoExtra> servicosExtras) {
+        this.servicosExtras.clear();
+        if (servicosExtras != null) {
+            this.servicosExtras.addAll(servicosExtras);
+            this.servicosExtras.forEach(servico -> servico.setQuarto(this));
+        }
+    }
+
+    public void adicionarServicoExtra(ServicoExtra servico) {
+        servico.setQuarto(this);
+        this.servicosExtras.add(servico);
     }
 }
