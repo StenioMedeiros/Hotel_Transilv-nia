@@ -2,7 +2,7 @@ package com.hotel_transylvania.controllers;
 
 import com.hotel_transylvania.dtos.ReservaDTO;
 import com.hotel_transylvania.entities.Reserva;
-import com.hotel_transylvania.exceptions.HotelTransylvaniaException;
+import com.hotel_transylvania.exceptions.*;
 import com.hotel_transylvania.services.ReservaService;
 
 import jakarta.validation.Valid;
@@ -35,8 +35,12 @@ public class ReservaController {
         try {
             Reserva reserva = reservaService.confirmarReserva(id);
             return ResponseEntity.ok(reserva);
-        } catch (HotelTransylvaniaException e) {
+        } catch (ReservaNaoEncontradaException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        } catch (ReservaJaConfirmadaException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (HotelTransylvaniaException e) {
+            return ResponseEntity.internalServerError().body("Erro ao confirmar reserva");
         }
     }
 
@@ -45,8 +49,12 @@ public class ReservaController {
         try {
             reservaService.cancelarReserva(id);
             return ResponseEntity.noContent().build();
-        } catch (HotelTransylvaniaException e) {
+        } catch (ReservaNaoEncontradaException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        } catch (ReservaJaCanceladaException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (HotelTransylvaniaException e) {
+            return ResponseEntity.internalServerError().body("Erro ao cancelar reserva");
         }
     }
 
@@ -60,5 +68,4 @@ public class ReservaController {
         return ResponseEntity.ok(reservaService.listarTodasReservas());
     }
 }
-
 

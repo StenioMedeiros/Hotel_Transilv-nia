@@ -4,7 +4,8 @@ import com.hotel_transylvania.dtos.ReservaDTO;
 import com.hotel_transylvania.entities.Hospede;
 import com.hotel_transylvania.entities.Quarto;
 import com.hotel_transylvania.entities.Reserva;
-import com.hotel_transylvania.exceptions.HotelTransylvaniaException;
+import com.hotel_transylvania.enums.StatusReserva;
+import com.hotel_transylvania.exceptions.*;
 import com.hotel_transylvania.repositories.ReservaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,23 +28,27 @@ public class ReservaService {
     public Reserva criarReserva(ReservaDTO reservaDTO) throws HotelTransylvaniaException {
         // Validações básicas
         if (reservaDTO.getDataCheckIn() == null || reservaDTO.getDataCheckOut() == null) {
-            throw new HotelTransylvaniaException("Datas de check-in e check-out são obrigatórias");
+            throw new DatasReservaObrigatoriasException();
         }
 
         Hospede hospede = hospedeService.buscarHospedePorId(reservaDTO.getHospedeId());
         Quarto quarto = quartoService.buscarPorId(reservaDTO.getQuartoId())
-                .orElseThrow(() -> new HotelTransylvaniaException("Quarto não encontrado"));
+                .orElseThrow(() ->  new HotelTransylvaniaException("Quarto não encontrado"));
 
         if (!quarto.getDisponivel()) {
-            throw new HotelTransylvaniaException("Quarto não está disponível");
+            throw new QuartoNaoDisponivelException();
         }
 
         if (reservaDTO.getDataCheckIn().isBefore(LocalDate.now())) {
-            throw new HotelTransylvaniaException("Data de check-in não pode ser no passado");
+            throw new DataCheckInInvalidaException();
         }
 
         if (reservaDTO.getDataCheckOut().isBefore(reservaDTO.getDataCheckIn())) {
-            throw new HotelTransylvaniaException("Data de check-out deve ser após check-in");
+            throw new DataCheckOutInvalidaException();
+        }
+
+        if (reservaRepository.existsReservaConflitante(quarto.getId(), reservaDTO.getDataCheckIn(), reservaDTO.getDataCheckOut())) {
+            throw new ReservaConflitanteException();
         }
 
         Reserva reserva = new Reserva(
@@ -60,14 +65,24 @@ public class ReservaService {
 
     public Reserva confirmarReserva(Long id) throws HotelTransylvaniaException {
         Reserva reserva = reservaRepository.findById(id)
-                .orElseThrow(() -> new HotelTransylvaniaException("Reserva não encontrada"));
+                .orElseThrow(() -> new ReservaNaoEncontradaException());
+        
+        if (reserva.getStatus() == StatusReserva.CONFIRMADA) {
+            throw new ReservaJaConfirmadaException();
+        }
+        
         reserva.confirmarReserva();
         return reservaRepository.save(reserva);
     }
 
     public void cancelarReserva(Long id) throws HotelTransylvaniaException {
         Reserva reserva = reservaRepository.findById(id)
-                .orElseThrow(() -> new HotelTransylvaniaException("Reserva não encontrada"));
+                .orElseThrow(() -> new ReservaNaoEncontradaException());
+        
+        if (reserva.getStatus() == StatusReserva.CANCELADA) {
+            throw new ReservaJaCanceladaException();
+        }
+        
         reserva.cancelarReserva();
         reservaRepository.save(reserva);
     }

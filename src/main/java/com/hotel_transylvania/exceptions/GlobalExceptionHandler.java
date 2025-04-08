@@ -49,4 +49,24 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(e.getMessage());
     }
     
+    @ExceptionHandler(ReservaNaoEncontradaException.class)
+    public ResponseEntity<String> handleReservaNaoEncontrada(ReservaNaoEncontradaException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
+    @ExceptionHandler({DataCheckInInvalidaException.class, DataCheckOutInvalidaException.class, 
+                      DatasReservaObrigatoriasException.class})
+    public ResponseEntity<String> handleDataReservaExceptions(HotelTransylvaniaException e) {
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(ReservaConflitanteException.class)
+    public ResponseEntity<String> handleReservaConflitante(ReservaConflitanteException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+    }
+
+    @ExceptionHandler({ReservaJaConfirmadaException.class, ReservaJaCanceladaException.class})
+    public ResponseEntity<String> handleStatusReservaExceptions(HotelTransylvaniaException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
 }
