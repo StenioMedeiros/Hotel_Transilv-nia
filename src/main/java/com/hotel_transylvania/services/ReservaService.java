@@ -33,7 +33,7 @@ public class ReservaService {
 
         Hospede hospede = hospedeService.buscarHospedePorId(reservaDTO.getHospedeId());
         Quarto quarto = quartoService.buscarPorId(reservaDTO.getQuartoId())
-                .orElseThrow(() ->  new HotelTransylvaniaException("Quarto não encontrado"));
+                .orElseThrow(() ->  new QuartoNaoEncontradoException());
 
         if (!quarto.getDisponivel()) {
             throw new QuartoNaoDisponivelException();
