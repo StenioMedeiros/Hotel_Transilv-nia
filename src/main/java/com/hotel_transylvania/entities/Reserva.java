@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hotel_transylvania.enums.StatusReserva;
 import com.hotel_transylvania.enums.TipoReserva;
 
@@ -17,6 +18,7 @@ public class Reserva {
 
     @ManyToOne
     @JoinColumn(name = "hospede_id", nullable = false)
+    @JsonIgnore
     private Hospede hospede;
 
     @ManyToOne

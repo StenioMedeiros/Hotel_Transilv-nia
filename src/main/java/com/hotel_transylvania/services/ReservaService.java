@@ -25,6 +25,11 @@ public class ReservaService {
     private QuartoService quartoService;
 
     public Reserva criarReserva(ReservaDTO reservaDTO) throws HotelTransylvaniaException {
+        // Validações básicas
+        if (reservaDTO.getDataCheckIn() == null || reservaDTO.getDataCheckOut() == null) {
+            throw new HotelTransylvaniaException("Datas de check-in e check-out são obrigatórias");
+        }
+
         Hospede hospede = hospedeService.buscarHospedePorId(reservaDTO.getHospedeId());
         Quarto quarto = quartoService.buscarPorId(reservaDTO.getQuartoId())
                 .orElseThrow(() -> new HotelTransylvaniaException("Quarto não encontrado"));
@@ -32,7 +37,7 @@ public class ReservaService {
         if (!quarto.getDisponivel()) {
             throw new HotelTransylvaniaException("Quarto não está disponível");
         }
- 
+
         if (reservaDTO.getDataCheckIn().isBefore(LocalDate.now())) {
             throw new HotelTransylvaniaException("Data de check-in não pode ser no passado");
         }

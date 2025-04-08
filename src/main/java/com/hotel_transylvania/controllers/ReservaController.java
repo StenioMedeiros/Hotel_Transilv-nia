@@ -4,6 +4,9 @@ import com.hotel_transylvania.dtos.ReservaDTO;
 import com.hotel_transylvania.entities.Reserva;
 import com.hotel_transylvania.exceptions.HotelTransylvaniaException;
 import com.hotel_transylvania.services.ReservaService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +21,7 @@ public class ReservaController {
     private ReservaService reservaService;
 
     @PostMapping
-    public ResponseEntity<?> criarReserva(@RequestBody ReservaDTO reservaDTO) {
+    public ResponseEntity<?> criarReserva(@Valid @RequestBody ReservaDTO reservaDTO) {
         try {
             Reserva reserva = reservaService.criarReserva(reservaDTO);
             return ResponseEntity.ok(reserva);
@@ -57,3 +60,5 @@ public class ReservaController {
         return ResponseEntity.ok(reservaService.listarTodasReservas());
     }
 }
+
+

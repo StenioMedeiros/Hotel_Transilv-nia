@@ -2,14 +2,26 @@ package com.hotel_transylvania.dtos;
 
 import com.hotel_transylvania.enums.TipoReserva;
 
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 public class ReservaDTO {
+    @NotNull(message = "O ID do hóspede é obrigatório")
     private Long hospedeId;
+
+    @NotNull(message = "O ID do quarto é obrigatório")
     private Long quartoId;
+
+    @NotNull(message = "A data de check-in é obrigatória")
     private LocalDate dataCheckIn;
+
+    @NotNull(message = "A data de check-out é obrigatória")
     private LocalDate dataCheckOut;
+
+    @NotNull(message = "O tipo de reserva é obrigatório")
     private TipoReserva tipo;
+
 
     // Getters and setters
     public Long getHospedeId() {
