@@ -62,6 +62,25 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+    @GetMapping("/hospedes/{id}")
+    public ResponseEntity<?> buscarHospedePorId(@PathVariable Long id) {
+        try {
+            Hospede hospede = service.buscarHospedePorId(id);
+            return ResponseEntity.ok(hospede);
+        } catch (HotelTransylvaniaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/administradores/{id}")
+    public ResponseEntity<?> buscarAdministradorPorId(@PathVariable Long id) {
+        try {
+            Administrador administrador = service.buscarAdministradorPorId(id);
+            return ResponseEntity.ok(administrador);
+        } catch (HotelTransylvaniaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
 
     @GetMapping("/hospedes/nome/{nome}")
     public ResponseEntity<?> buscarHospedePorNome(@PathVariable String nome) {

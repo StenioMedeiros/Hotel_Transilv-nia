@@ -73,7 +73,18 @@ public class UsuarioServices {
         }
         return administradores;
     }
+    
+    public Hospede buscarHospedePorId(Long id) {
+        return hospedeRepository.findById(id)
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("Hóspede não encontrado com ID: " + id));
+    }
 
+    public Administrador buscarAdministradorPorId(Long id) {
+        return administradorRepository.findById(id)
+                .orElseThrow(() -> new UsuarioNaoEncontradoException("Administrador não encontrado com ID: " + id));
+    }
+    
+    
     public Hospede buscarHospedePorCpf(String cpf) {
         validarCpf(cpf);
         Hospede hospede = hospedeRepository.findByCpf(cpf);
