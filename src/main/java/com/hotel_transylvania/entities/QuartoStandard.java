@@ -24,6 +24,6 @@ public class QuartoStandard extends Quarto {
     @Override
     public String exibirInfo() {
         return String.format("Quarto Standard #%d - Preço: R$%.2f - %s",
-                getNumero(), getPreco(), getDisponivel() ? "Disponível" : "Ocupado");
+                getNumero(), getPreco().doubleValue(), getDisponivel() ? "Disponível" : "Ocupado");
     }
 }
