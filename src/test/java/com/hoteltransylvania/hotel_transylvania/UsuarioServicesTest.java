@@ -6,7 +6,7 @@ import com.hotel_transylvania.entities.Administrador;
 import com.hotel_transylvania.entities.Hospede;
 import com.hotel_transylvania.enums.TipoUsuario;
 import com.hotel_transylvania.exceptions.CpfInvalidoException;
-import com.hotel_transylvania.exceptions.UsuarioJaExisteException;
+import com.hotel_transylvania.exceptions.CpfDuplicadoException;
 import com.hotel_transylvania.exceptions.UsuarioNaoEncontradoException;
 import com.hotel_transylvania.repositories.AdministradorRepository;
 import com.hotel_transylvania.repositories.HospedeRepository;
@@ -84,7 +84,7 @@ class UsuarioServicesTest {
     void cadastrarHospede_deveLancarExcecao_quandoHospedeJaExiste() {
         when(hospedeRepository.findByCpf(anyString())).thenReturn(hospede);
 
-        assertThrows(UsuarioJaExisteException.class, () -> usuarioServices.cadastrarHospede(createValidHospedeDTO()));
+        assertThrows(CpfDuplicadoException.class, () -> usuarioServices.cadastrarHospede(createValidHospedeDTO()));
         verify(hospedeRepository, never()).save(any(Hospede.class));
     }
 
@@ -115,7 +115,7 @@ class UsuarioServicesTest {
     void cadastrarAdministrador_deveLancarExcecao_quandoAdministradorJaExiste() {
         when(administradorRepository.findByCpf(anyString())).thenReturn(administrador);
 
-        assertThrows(UsuarioJaExisteException.class, () -> usuarioServices.cadastrarAdministrador(createValidAdministradorDTO()));
+        assertThrows(CpfDuplicadoException.class, () -> usuarioServices.cadastrarAdministrador(createValidAdministradorDTO()));
         verify(administradorRepository, never()).save(any(Administrador.class));
     }
 
