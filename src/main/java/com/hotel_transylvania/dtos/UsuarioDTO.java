@@ -18,8 +18,6 @@ public class UsuarioDTO {
     private String cpf;
 
     @NotBlank(message = "Telefone não pode estar em branco")
-    @Pattern(regexp = "^\\(?(\\d{2})\\)?[\\s-]?\\d{4,5}[\\s-]?\\d{4}$", 
-             message = "Telefone inválido. Use o formato (XX) XXXXX-XXXX ou (XX) XXXX-XXXX")
     private String telefone;
 
     @NotBlank(message = "Email não pode estar em branco")

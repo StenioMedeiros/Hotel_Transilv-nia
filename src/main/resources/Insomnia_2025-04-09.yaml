@@ -1,0 +1,675 @@
+type: collection.insomnia.rest/5.0
+name: Hotel-transilvanea
+meta:
+  id: wrk_72876024268d424ea58eee0dfbd31d24
+  created: 1744218505177
+  modified: 1744218505177
+collection:
+  - name: Usuario
+    meta:
+      id: fld_894da9d158ec418ebcfd7d8f9ab2cf61
+      created: 1744218505195
+      modified: 1744218505195
+      sortKey: -1743454012256
+    children:
+      - name: Administrador
+        meta:
+          id: fld_e5a7c2a532da4f90979e5a372ceb73f7
+          created: 1744218505203
+          modified: 1744218505203
+          sortKey: -1743463411729
+        children:
+          - url: http://localhost:8080/usuarios/administradores/cpf/12345678901
+            name: Buscar administrador por CPF
+            meta:
+              id: req_77fcea4ce79845a1b06eb18303b52a64
+              created: 1744218505207
+              modified: 1744218505207
+              isPrivate: false
+              sortKey: -1743463755254
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/10.3.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8080/usuarios/administradores/nome/João Silva
+            name: Buscar administrador por nome
+            meta:
+              id: req_f92f6ff82aaa4f109ce643bd880790af
+              created: 1744218505213
+              modified: 1744218505212
+              isPrivate: false
+              sortKey: -1743463757998
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/10.3.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8080/usuarios/administradores
+            name: Listar todos os administradores
+            meta:
+              id: req_7271688f8205451ebcd63b6ba22d89da
+              created: 1744218505218
+              modified: 1744218505218
+              isPrivate: false
+              sortKey: -1743463760846
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/10.3.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8080/usuarios/administradores
+            name: "Cadastrar administrador:"
+            meta:
+              id: req_5d12a3ddd4544ff5baac2439eb33b138
+              created: 1744218505221
+              modified: 1744218505221
+              isPrivate: false
+              sortKey: -1743463767271
+            method: POST
+            body:
+              mimeType: application/json
+              text: |
+                {
+                  "nome": "João Silva",
+                  "cpf": "12345678901",
+                  "telefone": "999999999",
+                  "email": "joao@email.com"
+                }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/10.3.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Hóspedes
+        meta:
+          id: fld_33fe235407354880a986662553c74866
+          created: 1744218505223
+          modified: 1744218505223
+          sortKey: -1743463438142
+        children:
+          - url: http://localhost:8080/usuarios/hospedes
+            name: Cadastrar hóspede
+            meta:
+              id: req_e9d640a78e164bcaa0527b453582c048
+              created: 1744218505226
+              modified: 1744218505226
+              isPrivate: false
+              sortKey: -1743463443124
+            method: POST
+            body:
+              mimeType: application/json
+              text: |-
+                { "nome": "João",
+                 "cpf": "12345678901", 
+                 "telefone": "999999999", 
+                 "email": "joao@email.com" }
+            headers:
+              - name: Content-Type
+                value: application/json
+              - name: User-Agent
+                value: insomnia/10.3.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8080/usuarios/hospedes
+            name: Listar todos os hóspedes
+            meta:
+              id: req_c89a29d55e4a43a4be5ad217d7a05a9b
+              created: 1744218505227
+              modified: 1744218505227
+              isPrivate: false
+              sortKey: -1743463536647
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/10.3.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8080/usuarios/hospedes/nome/João
+            name: Buscar hóspede por nome
+            meta:
+              id: req_d8e9d8e36bed46a69e20b7f3dc86f81c
+              created: 1744218505230
+              modified: 1744218505230
+              isPrivate: false
+              sortKey: -1743463574726
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/10.3.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8080/usuarios/hospedes/cpf/12345678901
+            name: Buscar hóspede por CPF
+            meta:
+              id: req_da9feef7ca7b400c910dbedd9ebf4ca4
+              created: 1744218505233
+              modified: 1744218505233
+              isPrivate: false
+              sortKey: -1743463629862
+            method: GET
+            headers:
+              - name: User-Agent
+                value: insomnia/10.3.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: http://localhost:8080/usuarios/hospedes/3
+            name: Remover hóspede (Check-out)
+            meta:
+              id: req_5c63c9e1b37b460d8f2cfb7f9a0b05d4
+              created: 1744218505235
+              modified: 1744218505235
+              isPrivate: false
+              sortKey: -1743463666731
+            method: DELETE
+            headers:
+              - name: User-Agent
+                value: insomnia/10.3.0
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+  - name: Quarto
+    meta:
+      id: fld_c7ce9680ad08400ca67cff38e786b3a1
+      created: 1744218505239
+      modified: 1744218505239
+      sortKey: -1743869133838
+    children:
+      - url: http://localhost:8080/quartos/2
+        name: " Buscar Quarto por ID"
+        meta:
+          id: req_47dbaca09b6d4073add67da7dd47b0f5
+          created: 1744218505241
+          modified: 1744218505241
+          isPrivate: false
+          sortKey: -1743869163124
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: " http://localhost:8080/quartos/tipo/STANDARD"
+        name: Listar por Tipo
+        meta:
+          id: req_b26295cf40b249fdbaa51eea10c39668
+          created: 1744218505244
+          modified: 1744218505244
+          isPrivate: false
+          sortKey: -1743869167824
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/quartos/disponiveis/true
+        name: Listar por Disponibilidade
+        meta:
+          id: req_17f093aaa05a4fbdb74defe3e6295599
+          created: 1744218505247
+          modified: 1744218505247
+          isPrivate: false
+          sortKey: -1743869178775
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/quartos/listaQuarto
+        name: Listar Todos os Quartos
+        meta:
+          id: req_b698eda06f4a41fc9cb18b3f3b16d9a4
+          created: 1744218505250
+          modified: 1744218505250
+          isPrivate: false
+          sortKey: -1743869183416
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: " http://localhost:8080/quartos/cadastro"
+        name: "Criar Quarto "
+        meta:
+          id: req_4f1172410ace485c9c090cb2c0866a4c
+          created: 1744218505252
+          modified: 1744218505252
+          isPrivate: false
+          sortKey: -1743869186752
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "numero": 101,
+              "preco": 250.00,
+              "tipo": "STANDARD"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/quartos/1
+        name: Deletar Quarto
+        meta:
+          id: req_f4da2b56538f4bb7b697a79f3ffe8b3c
+          created: 1744218505254
+          modified: 1744218505254
+          isPrivate: false
+          sortKey: -1743869163024
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/quartos/52
+        name: Atualizar Quarto
+        meta:
+          id: req_c7697701d56d44c6805fc47ee9ba1f3a
+          created: 1744218505257
+          modified: 1744218505257
+          isPrivate: false
+          sortKey: -1743869163074
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "numero": 102,
+              "preco": 300.00,
+              "disponivel": true,
+              "tipo": "STANDARD"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/quartos/1/disponibilidade?disponivel=false
+        name: New Request
+        meta:
+          id: req_bc29f8cbc5e54237a189804c862f0e81
+          created: 1744218505259
+          modified: 1744218505259
+          isPrivate: false
+          sortKey: -1743869162924
+        method: PATCH
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: ServicoExtra
+    meta:
+      id: fld_a25cb693e7cb43368565aab5649cd1e0
+      created: 1744218505262
+      modified: 1744218505262
+      sortKey: -1743971940866
+    children:
+      - url: " http://localhost:8080/servicos-extras/quarto/52"
+        name: Listar Serviços de um Quarto
+        meta:
+          id: req_edc6ef64679247f59240ca3e0b50bd7b
+          created: 1744218505264
+          modified: 1744218505264
+          isPrivate: false
+          sortKey: -1743978603581
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: " http://localhost:8080/servicos-extras"
+        name: Criar Serviço Extra
+        meta:
+          id: req_51d3fa1d0e0e4dae8d59696e77413ad5
+          created: 1744218505266
+          modified: 1744218505266
+          isPrivate: false
+          sortKey: -1743978603681
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Frigobar Premium",
+              "precoAdicional": 50.00,
+              "quartoId": 52
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: " http://localhost:8080/servicos-extras/1"
+        name: Buscar Serviço por ID
+        meta:
+          id: req_7fdfafd1a45c45c2a38ce03b4ec74922
+          created: 1744218505268
+          modified: 1744218505268
+          isPrivate: false
+          sortKey: -1743978603481
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: " http://localhost:8080/servicos-extras/1"
+        name: Atualizar Serviço
+        meta:
+          id: req_0645396dcbf740e8aa1085346488fb48
+          created: 1744218505271
+          modified: 1744218505271
+          isPrivate: false
+          sortKey: -1743978603381
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "nome": "Frigobar Deluxe",
+              "precoAdicional": 70.00,
+              "quartoId": 1
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: " http://localhost:8080/servicos-extras/2"
+        name: Deletar Serviço
+        meta:
+          id: req_c2da4190bee24f0e90528ff94335302c
+          created: 1744218505273
+          modified: 1744218505273
+          isPrivate: false
+          sortKey: -1743978603281
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.1
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Reserva
+    meta:
+      id: fld_c620632ce9a54d74beeb3cd5f1298417
+      created: 1744218505275
+      modified: 1744218505275
+      sortKey: -1744095463045
+    children:
+      - url: http://localhost:8080/reservas
+        name: Listar Todas as Reservas
+        meta:
+          id: req_96139387c6644939b2ac47355e7d863a
+          created: 1744218505277
+          modified: 1744218505277
+          isPrivate: false
+          sortKey: -1744097197142
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/reservas/hospede/152
+        name: Reservas por Hóspede
+        meta:
+          id: req_a0f95bf9b2c74c82893b76dd7abe0e40
+          created: 1744218505280
+          modified: 1744218505280
+          isPrivate: false
+          sortKey: -1744097203757
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/reservas/1
+        name: Cancelar Reserva
+        meta:
+          id: req_d5edcf8eb15743b09baea3c65a83019f
+          created: 1744218505282
+          modified: 1744218505282
+          isPrivate: false
+          sortKey: -1744097207901
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/reservas/4/confirmar
+        name: Confirmar Reserva
+        meta:
+          id: req_b6451aaad95c4c6584de9b39c8e0c502
+          created: 1744218505284
+          modified: 1744218505284
+          isPrivate: false
+          sortKey: -1744097213143
+        method: POST
+        headers:
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:8080/reservas
+        name: Criar Reserva
+        meta:
+          id: req_0c3215f1884e40a79e9f03da42f0bbd3
+          created: 1744218505287
+          modified: 1744218505287
+          isPrivate: false
+          sortKey: -1744097217318
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+              "hospedeId": 152,
+              "quartoId": 53,
+                "dataCheckIn": "2025-04-21",
+                "dataCheckOut": "2025-04-23",
+                "tipo": "NORMAL"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.0.2
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_70bed7577fe1415aa6b85b4f1fb6be46
+    created: 1744218505189
+    modified: 1744218505189
+environments:
+  name: Base Environment
+  meta:
+    id: env_797c9c84c3384e0f94639482eedb868b
+    created: 1744218505182
+    modified: 1744218505182
+    isPrivate: false
