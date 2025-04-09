@@ -16,15 +16,15 @@ public class TemporadaService {
         LocalDate checkIn = reserva.getDataCheckIn();
         Month month = checkIn.getMonth();
         
-        // High season - no discount
+        // preco normal
         if (List.of(Month.JANUARY, Month.FEBRUARY, Month.JULY, Month.DECEMBER).contains(month)) {
             return BigDecimal.ZERO;
         }
-        // Medium season - 10% discount
+        //  10% desconto
         else if (List.of(Month.MARCH, Month.APRIL, Month.MAY, Month.JUNE).contains(month)) {
             return reserva.getValorTotal().multiply(BigDecimal.valueOf(0.1));
         }
-        // Low season - 20% discount
+        //  20% discounto
         else {
             return reserva.getValorTotal().multiply(BigDecimal.valueOf(0.2));
         }
