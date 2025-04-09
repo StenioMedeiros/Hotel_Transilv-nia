@@ -3,32 +3,35 @@ package com.hotel_transylvania.services;
 import com.hotel_transylvania.repositories.HospedeRepository;
 import com.hotel_transylvania.repositories.AdministradorRepository;
 import com.hotel_transylvania.entities.Hospede;
-import com.hotel_transylvania.dtos.AdministradorDTO;
-import com.hotel_transylvania.dtos.HospedeDTO;
-import com.hotel_transylvania.dtos.UsuarioDTO;
 import com.hotel_transylvania.entities.Administrador;
+import com.hotel_transylvania.dtos.HospedeDTO;
+import com.hotel_transylvania.dtos.AdministradorDTO;
 import com.hotel_transylvania.enums.TipoUsuario;
 import com.hotel_transylvania.exceptions.CpfInvalidoException;
-import com.hotel_transylvania.exceptions.UsuarioJaExisteException;
+import com.hotel_transylvania.exceptions.CpfDuplicadoException;
 import com.hotel_transylvania.exceptions.UsuarioNaoEncontradoException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
 public class UsuarioServices {
-	
-	@Autowired 
+    
+    @Autowired 
     private HospedeRepository hospedeRepository;
-	@Autowired 
+    
+    @Autowired 
     private AdministradorRepository administradorRepository;
 
     public Hospede cadastrarHospede(HospedeDTO hospedeDto) {
         validarCpf(hospedeDto.getCpf());
         
         if (hospedeRepository.findByCpf(hospedeDto.getCpf()) != null) {
-            throw new UsuarioJaExisteException("Já existe um hóspede com este CPF");
+            throw new CpfDuplicadoException(
+                "Já existe um hóspede cadastrado com o CPF: " + hospedeDto.getCpf()
+            );
         }
 
         Hospede hospede = new Hospede(
@@ -45,7 +48,9 @@ public class UsuarioServices {
         validarCpf(administradorDto.getCpf());
         
         if (administradorRepository.findByCpf(administradorDto.getCpf()) != null) {
-            throw new UsuarioJaExisteException("Já existe um administrador com este CPF");
+            throw new CpfDuplicadoException(
+                "Já existe um administrador cadastrado com o CPF: " + administradorDto.getCpf()
+            );
         }
 
         Administrador administrador = new Administrador(
@@ -83,7 +88,6 @@ public class UsuarioServices {
         return administradorRepository.findById(id)
                 .orElseThrow(() -> new UsuarioNaoEncontradoException("Administrador não encontrado com ID: " + id));
     }
-    
     
     public Hospede buscarHospedePorCpf(String cpf) {
         validarCpf(cpf);
